@@ -21,4 +21,25 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 
-renderer.render(scene, camera);
+const radius = 10;  
+const tubeRadius = 3;  
+const radialSegments = 10;  
+const tubularSegments = 20;
+
+const torusGeometry = new THREE.TorusGeometry(
+    radius, tubeRadius,
+    radialSegments, tubularSegments);
+
+const basicMaterial = new THREE.MeshBasicMaterial({color: 0xFF6347, wireframe: true});
+
+const torus = new THREE.Mesh(torusGeometry, basicMaterial);
+
+scene.add(torus);
+
+
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+
+animate();
